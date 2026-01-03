@@ -1,0 +1,20 @@
+.wrapper-container{
+    height : 60px;
+    background-color: orange;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.title{
+
+}
+
+.nav-menu{
+    display: flex;
+}
+
+.nav-item{
+    margin-right : 10px;
+}

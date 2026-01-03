@@ -56,3 +56,21 @@ After this the project is ready for development, we can run ng serve and proceed
 
 *******************************************************************************
 
+What is a component ?
+A component is a basic building block of an angular application
+it consists of :  
+1. html template : it is displayed wherever the component is used using its selector or through routing
+2. ts file(typescript file) : it contains logic of the component
+3. one or more stylesheets(.css/.scss files) : the styles from these files are applied on the elements of the html template file.
+4. spec.ts file : it contains the unit tests to test the component code.
+
+How to create a component ?
+We can create it manually or using the shortcut command, ng g c path/component-name , for eg : ng g c components/header , ng g c components/home-page
+we need to register the component class name under the declarations array of the NgModule decorator, the above command will automatically register the component in the declarations array of the NgModule decorator
+Now the component is ready to be used using its selector.
+we can put the selector in the html template of any other component.
+
+*********************************************************************************************
+
+
+

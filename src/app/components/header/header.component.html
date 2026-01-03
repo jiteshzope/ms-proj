@@ -1,0 +1,26 @@
+
+<!-- This is called as string interpolation -->
+<!-- Display the application title -->
+
+<div class="wrapper-container">
+    <h1 class="title">{{ appTitle }}</h1>
+    <!-- Navigation Menu -->
+    <div class="nav-menu" *ngIf="showNavMenu">
+        <!-- <div class="nav-item">Home</div>
+        <div class="nav-item">About</div>
+        <div class="nav-item">Services</div>
+        <div class="nav-item">Contact</div> -->
+
+        <!-- Using *ngFor to dynamically create navigation items -->
+
+        <div class="nav-item" *ngFor="let item of navItems">
+            {{ item }}
+        </div>
+
+
+    </div>
+</div>
+
+
+
+
