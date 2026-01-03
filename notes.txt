@@ -39,13 +39,20 @@ Once the project is ready and we need to host the application on our customer do
 *************************************
 
 How to deploy the code to github-pages
-github-pages is a deployment server, where the application can be hosted, by copying the bundles to it.
+github-pages is a deployment server, where the application can be hosted, by copying the bundles to github-pages.
 
 Steps : 
 
 1. we need to create the output bundles by using the command , 
-ng build --configuration production --base-href /project-name/ , the bundles will be created under the dist/project-name folder.
+ng build --configuration production --base-href /project-name/ , the bundles will be created under the dist/project-name folder in the local machine.
 
 2. Then use the command , npx angular-cli-ghpages --dir=dist/ms-proj , this command will create a git-branch temporarily in local machine named 'gh-pages', then it will copy the output bundles to this branch, then it will commit the code and push this branch automatically to remote github, we can verify this branch there on github. The it will automatically deploy the code at the root level in this branch to github pages. Then it will delete the temporarily created gh-pages branch from local machine(not from github). Now we can open the url in browser, all the code will be downloaded in the current tab of the browser from github-pages, which we can check in 'sources'. index.html file is loaded first, and inside which rest of the application is loaded.
 
+
+************************************************************************
+
+// If we clone someone else's angular project on our machine, node_modules folder is absent(bcoz it is never pushed to github), means all the packages from package.json are not yet installed, so we need to navigate first to the project folder/directory on the terminal and then run the command, npm install, this will automatically check package.json file for dependencies and devdependencies and it will download and install all those packges under node_modules folder. 
+After this the project is ready for development, we can run ng serve and proceed with the development
+
+*******************************************************************************
 
