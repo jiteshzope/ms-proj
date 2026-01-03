@@ -1,0 +1,51 @@
+************************************ Notes ****************************
+
+// package.json
+
+package.json contains all the packages that the angular project is dependent on.
+
+Any package that we want to use in the application we need to register either under dependencies or under devdependencies
+
+dependencies contains the packages which are needed for the application main functionality, means the packages  which are used when the application actually runs in the browser, all these packages are registered under dependencies
+
+devdependencies contains the packages which are needed to develop the angular application, means all the packages which are needed to locally run the app using ng serve, create the bundles using ng build, test the application using ng test and to do all kinds of development activities, these packages are registered under devdependencies.
+
+// ***********************************************************************************************************
+
+Step by step how to create an angular project : 
+
+We need node.js downloaded on our computer
+There are multiple versions of node.js such as 14,15,16,17 ... 22, 25, etc available on https://nodejs.org/en/download  , from here we can download any version which we want manually.
+At a time, only one version of node.js can be installed on our machine
+Sometimes we need to work on multiple angular projects which use different angular versions. example : Angular13 project might need node version 20, but Angular 22 project might need node version 24, which means we need to a way to switch between multiple node versions easily, which can be achieved using nvm(node version manager)
+So instead of downloading and installing node.js manually on our machine, we can use nvm ****
+we can download nvm from https://github.com/coreybutler/nvm-windows/releases , cross check if nvm is installed using, 
+nvm --version
+Then we can use nvm directly to download and install any version of node.js using a command like nvm install [nodeversion]
+nvm install 20 , nvm install 24 
+We can check which are versions of node.js are installed on the machine by using , nvm list
+Then from all of these node.js version we can use any version by using the command, nvm use [nodeversion]
+nvm use 20 , nvm use 24
+we can check current node.js version which we are using by command, node --version
+Once the needed node.js version is installed, we can use the npm command,
+npm means node package manager and it comes along with node.js installation automatically
+we can now use npm, to download the main angular cli package and all the other packages as needed, that our application is dependent on.
+Now download and install angular-cli package first, npm install -g @angular/cli@13, here we are downloading and installing the angular cli version 13, once done, we can use 'ng' command on terminal. 
+Use the command, ng new project-name , to create a new angular project, As we have installed angular-cli version 13, it will create an angular version 13 project. This command will download and install all necessary packages under node_modules. All the packages and their versions will be registered in package.json
+Now Our project is ready for development, to locally build and run it in the browser, use command , ng serve --> this command will scan the entire project, will create output bundles temporarily in-memory on local machine from the project code, then when we hit the url localhost://4200 in the browser, these temporarily created bundles from memory are downloaded in the browser. This is how the application runs in the browser locally for development
+
+Once the project is ready and we need to host the application on our customer domain we can create the output bundles using, ng build, this command will create output bundles in dist/project-name folder. which can be copied and pasted into the hosting provider's website's folder. Then we can use the url in the browser, and as soon as we hit enter the bundles will be downloaded in the current tab of the browser, which we can see in 'sources', this code then runs in the current tab of the browser.
+
+*************************************
+
+How to deploy the code to github-pages
+github-pages is a deployment server, where the application can be hosted, by copying the bundles to it.
+
+Steps : 
+
+1. we need to create the output bundles by using the command , 
+ng build --configuration production --base-href /project-name/ , the bundles will be created under the dist/project-name folder.
+
+2. Then use the command , npx angular-cli-ghpages --dir=dist/ms-proj , this command will create a git-branch temporarily in local machine named 'gh-pages', then it will copy the output bundles to this branch, then it will commit the code and push this branch automatically to remote github, we can verify this branch there on github. The it will automatically deploy the code at the root level in this branch to github pages. Then it will delete the temporarily created gh-pages branch from local machine(not from github). Now we can open the url in browser, all the code will be downloaded in the current tab of the browser from github-pages, which we can check in 'sources'. index.html file is loaded first, and inside which rest of the application is loaded.
+
+
