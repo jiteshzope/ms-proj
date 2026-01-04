@@ -17,7 +17,7 @@
     <ng-container *ngIf="showHelperText1"> <span>Order Wine</span></ng-container>
 
     <!-- using ngTemplateOutlet directive to render the orderVegTemplate defined somewhere else -->
-    <ng-container *ngTemplateOutlet="orderVegTemplate"></ng-container>
+    <ng-container *ngTemplateOutlet="orderVegTemplate; context: {$implicit: 'Leafy Vegetables', key1 : 'paalak'}"></ng-container>
 
     <!-- Here we are using ng-container to remove the additional unwanted parent div that was getting inserted before into the dom , so we used ng-container at the place of the parent div, and thus no additional element is added to the DOM -->
     <!-- <div class="nav-menu">
@@ -59,8 +59,8 @@
 </ng-template>
 
 
-<ng-template #orderVegTemplate>
-    <span>Order Vegetables</span>
+<ng-template #orderVegTemplate let-vegType let-vege1="key1">
+    <span>Order Vegetables : {{vegType}} : {{vege1}}</span>
 </ng-template>
 
 
