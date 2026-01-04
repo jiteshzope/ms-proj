@@ -7,11 +7,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  appTitle: string = "Foodie's Paradise";
+  showTitle1 : boolean = false;
+  showHelperText1 : boolean = false;
+
+  appTitle1: string = "Foodie's Paradise";
 
   navItems: string[] = ["Home", "About", "Services", "Contact"];
 
   showNavMenu: boolean = true;
+
+  shopingList = [
+    { type: 'garments', value: 'Collor shirt' },
+    { type: 'disposables', value: 'Paper cups' },
+    { type: 'unknown', value: '???' }
+  ];
 
   constructor() {
     console.log("Header component constructor called.");
@@ -19,7 +28,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     console.log("Header component initialized, ngOnInit called.");
-    this.appTitle = "Xoraano";
+    this.appTitle1 = "Xoraano";
   }
 
 }

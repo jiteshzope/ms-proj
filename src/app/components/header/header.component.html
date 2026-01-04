@@ -2,8 +2,40 @@
 <!-- This is called as string interpolation -->
 <!-- Display the application title -->
 
-<div class="wrapper-container">
-    <h1 class="title">{{ appTitle }}</h1>
+<!-- Here wrapperContainer is called as a reference variable which refers to this div element -->
+<div #wrapperContainer class="wrapper-container">
+    <!-- title -->
+    <h1 *ngIf="showTitle1; else anotherTitleTemplate" class="title">{{ appTitle1 }}</h1>
+
+    <!-- helper text -->
+    <!-- the content inside the ng-container is rendered directly in dom, but the ng-container tags itself are not rendered -->
+    <ng-container>
+        <span>Order food</span>
+    </ng-container>
+
+    <!-- using *ngIf directive to conditionally render the helper text -->
+    <ng-container *ngIf="showHelperText1"> <span>Order Wine</span></ng-container>
+
+    <!-- using ngTemplateOutlet directive to render the orderVegTemplate defined somewhere else -->
+    <ng-container *ngTemplateOutlet="orderVegTemplate"></ng-container>
+
+    <!-- Here we are using ng-container to remove the additional unwanted parent div that was getting inserted before into the dom , so we used ng-container at the place of the parent div, and thus no additional element is added to the DOM -->
+    <!-- <div class="nav-menu">
+        <ng-container *ngFor="let item of ['insta','facebook','whatsapp']">
+            <div class="nav-item">{{ item }}</div>
+        </ng-container>
+    </div> -->
+
+    <!--  -->
+    <ng-container *ngFor="let item of shopingList">
+        <ng-container *ngIf="item.type === 'garments'">
+            <ng-container *ngTemplateOutlet="garmentsTemplate; context:{ $implicit: item, key1: 'red' }"></ng-container>
+        </ng-container>
+        <ng-container *ngIf="item.type === 'disposables'">
+            <ng-container *ngTemplateOutlet="disposablesTemplate; context:{ $implicit: item, key1: 'green', key2: 'blue' }"></ng-container>
+        </ng-container>
+    </ng-container>
+
     <!-- Navigation Menu -->
     <div class="nav-menu" *ngIf="showNavMenu">
         <!-- <div class="nav-item">Home</div>
@@ -11,16 +43,32 @@
         <div class="nav-item">Services</div>
         <div class="nav-item">Contact</div> -->
 
-        <!-- Using *ngFor to dynamically create navigation items -->
+        <!-- Using *ngFor to dynamically create navigation items and insert them into the DOM -->
 
         <div class="nav-item" *ngFor="let item of navItems">
             {{ item }}
         </div>
 
-
     </div>
 </div>
 
+<!--  anotherTitleTemplate is called as the template reference variable, it starts with # and it refers to this ng-template element -->
+<!-- we can then use the variable at some other place, such as with the *ngIf directive to render this template conditionally -->
+<ng-template #anotherTitleTemplate>
+    <h2 class="title">Another title</h2>
+</ng-template>
 
 
+<ng-template #orderVegTemplate>
+    <span>Order Vegetables</span>
+</ng-template>
+
+
+<ng-template #garmentsTemplate let-item1 let-myfirstColor="key1">
+    <span>Clothes: {{ item1?.value }} {{myfirstColor}}</span>
+</ng-template>
+
+<ng-template #disposablesTemplate let-item2 let-myfirstColor="key1" let-mysecondColor="key2">
+    <span>Disposables: {{ item2?.value }} {{myfirstColor+'&'+mysecondColor}}</span>
+</ng-template>
 
