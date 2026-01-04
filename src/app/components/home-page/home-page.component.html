@@ -1,1 +1,16 @@
 <p>home-page works!</p>
+
+<!-- <ng-content select=".text2"></ng-content>
+<ng-content select=".text1"></ng-content> -->
+
+<!-- Content projected from parent component will be inserted here at the place marked by <ng-content> tags -->
+<!-- <ng-content></ng-content>
+
+<ng-content select="[type]"></ng-content>
+<ng-content select="#section1"></ng-content> -->
+
+<div [ngSwitch]="name">
+  <div *ngSwitchCase="'John Doe'">Welcome, John Doe!</div>
+  <div *ngSwitchCase="'Jane Smith'">Hello, Jane Smith!</div>
+  <div *ngSwitchDefault>Welcome, Guest!</div>
+</div>

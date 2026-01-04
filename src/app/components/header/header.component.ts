@@ -23,11 +23,11 @@ export class HeaderComponent implements OnInit {
   ];
 
   constructor() {
-    console.log("Header component constructor called.");
+    // console.log("Header component constructor called.");
   }
 
   ngOnInit(): void {
-    console.log("Header component initialized, ngOnInit called.");
+    // console.log("Header component initialized, ngOnInit called.");
     this.appTitle1 = "Xoraano";
   }
 

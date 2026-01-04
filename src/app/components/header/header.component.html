@@ -17,6 +17,9 @@
     <ng-container *ngIf="showHelperText1"> <span>Order Wine</span></ng-container>
 
     <!-- using ngTemplateOutlet directive to render the orderVegTemplate defined somewhere else -->
+    <!-- context object is used to pass values to the template -->
+    <!-- The value assigned to $implicit will be available as the first variable in the template using the syntax let-anyName -->
+    <!-- We can pass multiple values using the context object and all of those values can be accessed using the let-varName=passedKeyName syntax in the template -->
     <ng-container *ngTemplateOutlet="orderVegTemplate; context: {$implicit: 'Leafy Vegetables', key1 : 'paalak'}"></ng-container>
 
     <!-- Here we are using ng-container to remove the additional unwanted parent div that was getting inserted before into the dom , so we used ng-container at the place of the parent div, and thus no additional element is added to the DOM -->
@@ -26,15 +29,14 @@
         </ng-container>
     </div> -->
 
-    <!--  -->
-    <ng-container *ngFor="let item of shopingList">
+    <!-- <ng-container *ngFor="let item of shopingList">
         <ng-container *ngIf="item.type === 'garments'">
             <ng-container *ngTemplateOutlet="garmentsTemplate; context:{ $implicit: item, key1: 'red' }"></ng-container>
         </ng-container>
         <ng-container *ngIf="item.type === 'disposables'">
             <ng-container *ngTemplateOutlet="disposablesTemplate; context:{ $implicit: item, key1: 'green', key2: 'blue' }"></ng-container>
         </ng-container>
-    </ng-container>
+    </ng-container> -->
 
     <!-- Navigation Menu -->
     <div class="nav-menu" *ngIf="showNavMenu">
