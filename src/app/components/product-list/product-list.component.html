@@ -1,1 +1,41 @@
 <p>product-list works!</p>
+
+<!-- 
+if we use square brackets around an attribute on an element, it means we can run any javascript code in between the double quotes, the result of the javascript code expression will be assigned to the attribute
+if we do not use square brackets, the attribute value will be treated as a string
+<div [someSupportedAttribute]=" anyJavascriptCode " someOtherSupportedAttribute=" thisWillBeAStringDirectly ">
+    Example
+</div> 
+-->
+
+<!-- ngStyle directive -->
+<!--  the key will be any css property and the value will be the value of the css property -->
+<!-- example : color, backgroundColor, display, alignItems , align-items, height, width -->
+ <!-- the key can be either in single quotes(like 'font-weight') or camelCase(like fontWeight) -->
+<!-- <div [ngStyle]="goat">This text is styled using ngStyle directive</div>
+<div [ngStyle]="{ color: redColor, 'height': '20px', 'font-weight' : 'bold', fontWeight: 'bold', backgroundColor : 'yellow'}">This another text is styled using ngStyle directive</div>
+<div [ngStyle]="{ color: 'green', 'height': (num1 + num2) + 'px', 'font-weight' : 'bold', backgroundColor : 'lightgrey'}">This another text is styled using ngStyle directive with interpolation</div> -->
+
+<!-- *****************************************************************************
+  -->
+<!-- ngClass directive -->
+
+ <!-- value can be string of class names separated by space -->
+<!-- <div class="class1 class2" [ngClass]=" 'class1 class2' ">This text is styled using ngClass directive with string of class names</div> -->
+
+<!-- value can also be array of class names -->
+<!-- <div [ngClass]="['class2', 'class3']">This text is styled using ngClass directive with array of class names</div> -->
+
+<!-- value can also be object with key as class name and value as boolean -->
+<!-- if the value is true, the class will be applied else not applied -->
+<!-- <div [ngClass]="{ 'class1': true, 'class2': false, 'class3': myBoolean, class4 : (5%2 === 1) }">This text is styled using ngClass directive with object where keys are class names and boolean values</div> -->
+
+<!-- **************************************************************************************************** -->
+
+<app-product-item [parentData1]="parentVar1" [parentData2]="parentVar2" (valueChanged)="onValueChanged($event)"></app-product-item>
+
+<div *ngFor="let product of products">
+    <h3>{{ product.name }}</h3>
+    <p>Price: {{ product.price }}</p>
+    <hr>
+</div>
