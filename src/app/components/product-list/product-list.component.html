@@ -31,8 +31,10 @@ if we do not use square brackets, the attribute value will be treated as a strin
 <!-- <div [ngClass]="{ 'class1': true, 'class2': false, 'class3': myBoolean, class4 : (5%2 === 1) }">This text is styled using ngClass directive with object where keys are class names and boolean values</div> -->
 
 <!-- **************************************************************************************************** -->
-
-<app-product-item [parentData1]="parentVar1" [parentData2]="parentVar2" (valueChanged)="onValueChanged($event)"></app-product-item>
+ 
+<!-- the myEmmiter and valueChanged are the events of the ProductItemComponent which are invoked whenever data is emitted from child using the emit method  -->
+<!--  -->
+<app-product-item [parentData1]="parentVar1" [parentData2]="parentVar2" (myEmmiter)="onMyEmmiter(10, $event, 12)" (valueChanged)="onValueChanged($event)"></app-product-item>
 
 <div *ngFor="let product of products">
     <h3>{{ product.name }}</h3>

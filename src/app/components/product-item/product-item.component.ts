@@ -22,11 +22,15 @@ export class ProductItemComponent implements OnInit {
   // Here onValueChanged is a method of the parent component which will be called when the data is emitted from the child component
   @Output() valueChanged: EventEmitter<string> = new EventEmitter<string>();
 
+  @Output() myEmmiter: EventEmitter<number> = new EventEmitter<number>();
+
   constructor() { }
 
   ngOnInit(): void {
     console.log(this.parentData1);
     console.log(this.parentData2);
+
+    this.myEmmiter.emit(55);
   }
 
   onClick() {

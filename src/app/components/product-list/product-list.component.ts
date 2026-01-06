@@ -24,6 +24,10 @@ export class ProductListComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onMyEmmiter(num1: number, data: number, num2: number) {
+    console.log('Received from child emitter: ' + data);
+  }
+
   onValueChanged(data: string) {
     console.log('Received from child: ' + data);
   }
