@@ -32,4 +32,12 @@ export class ProductListComponent implements OnInit {
     console.log('Received from child: ' + data);
   }
 
+  onDivClick(myClickEventData : any) {
+    console.log('Div clicked',  myClickEventData);
+  }
+
+  onHover(myHoverEventData : any) {
+    console.log('Mouse hovered',  myHoverEventData);
+  }
+
 }

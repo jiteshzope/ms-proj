@@ -31,13 +31,40 @@ if we do not use square brackets, the attribute value will be treated as a strin
 <!-- <div [ngClass]="{ 'class1': true, 'class2': false, 'class3': myBoolean, class4 : (5%2 === 1) }">This text is styled using ngClass directive with object where keys are class names and boolean values</div> -->
 
 <!-- **************************************************************************************************** -->
- 
-<!-- the myEmmiter and valueChanged are the events of the ProductItemComponent which are invoked whenever data is emitted from child using the emit method  -->
-<!--  -->
-<app-product-item [parentData1]="parentVar1" [parentData2]="parentVar2" (myEmmiter)="onMyEmmiter(10, $event, 12)" (valueChanged)="onValueChanged($event)"></app-product-item>
 
-<div *ngFor="let product of products">
+
+<!-- we can use the property binding syntax to pass data from parent to child component -->
+<!--  As we have used [] around parentData1, the thing inside corresponsing "" should be a javascript expression -->
+<!-- As we do not use [] around parentData2, the value will be treated as a string -->
+<!-- <app-product-item [parentData1]="parentVar1" parentData2="Dogu"></app-product-item> -->
+
+<!-- we can listen to the events myEmmiter and  valueChanged using the event binding syntax, and whenever the event is emitted from the child component, we can run some javascript code, like we can call a method of the parent component, the data emmited along with the event will be present inside $event -->
+<!-- <app-product-item (myEmmiter)="onMyEmmiter(10, $event, 12)" (valueChanged)="onValueChanged($event)"></app-product-item> -->
+
+<!-- It is fine if we do not pass some input properties or do not listen to some output events -->
+<!-- <app-product-item [parentData1]="parentVar1" (myEmmiter)="onMyEmmiter(10, $event, 12)"></app-product-item> -->
+
+<!-- It is even fine if we do not pass any input properties or do not listen to any output events -->
+<!-- The input properties will have their default values -->
+<!-- The data emitted with the output events will be lost -->
+<!-- <app-product-item></app-product-item> -->
+
+
+<!-- the value of the products is received as an input property from the parent component, check the ts file -->
+<!-- <div *ngFor="let product of products">
     <h3>{{ product.name }}</h3>
     <p>Price: {{ product.price }}</p>
     <hr>
-</div>
+</div> -->
+
+<!-- property binding -->
+<!--  As we have used [] around parentData1, the thing inside corresponsing "" should be a javascript expression -->
+<!-- As we do not use [] around parentData2, the value will be treated as a string -->
+<!-- <app-product-item [parentData1]="['snow','goat']" parentData2="dukku"></app-product-item>
+<div class="myclass" style="color: #000;background-color: aqua;">Property binding</div> -->
+
+<!-- event binding / event listening / event handling -->
+<!-- when the event is emitted from the child component, we can run some javascript code -->
+<!-- Mostly we call a method of the parent component when the event is emitted and pass the event data to it as argument which is present in $event -->
+<!-- <app-product-item (myEmmiter)="onMyEmmiter(10, $event, 12)" (valueChanged)="onValueChanged($event)"></app-product-item> -->
+<div (click)="onDivClick($event)" (hover)="onHover($event)">my div</div>

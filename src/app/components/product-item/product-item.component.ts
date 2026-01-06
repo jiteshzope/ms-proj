@@ -13,7 +13,7 @@ export class ProductItemComponent implements OnInit {
   // we can create a property(ex-parentData1) and decorate it with @Input decorator and then use the same property(ex-parentData1) on the selector tag of the child component in the HTML file of the parent component using the property binding syntax([parentData1]="parentVar1") like below
   // <app-product-item [parentData1]="parentVar1"></app-product-item>
   // Here parentVar1 is a property of the parent component which holds the data to be passed to the child component
-  @Input() parentData1: string = '';
+  @Input() parentData1: any = '';
   @Input() parentData2: string = '';
 
   // How to pass data child to parent using @Output decorator
