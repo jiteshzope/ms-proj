@@ -63,16 +63,27 @@ export class ProductListComponent implements OnInit {
 
   // here we are decorating the myDivElement property with @ViewChild decorator to get reference of the div element
   // initially when the component is just created, the value inside the myDivElement property will be undefined, After sometime ViewChild decorator will store/populate the object/instance/reference of html element into it
+  // ViewChild will look for the first occurrence of the html element having the reference variable(myDiv) from the component template and will store its reference inside the myDivElement property
   // @ViewChild('myDiv') myDivElement : ElementRef<any> | undefined; // myDivElement of type ElementRef of generic type any or undefined
 
   // We can use @ViewChild decorator to get reference/instance/object of a child component
   // we can use that instance to access the properties and methods of that child component
   // we can change the values of the properties of that child component and call its methods from the parent component
-  @ViewChild('productItem') productItemElement : ProductItemComponent | undefined;
+  // @ViewChild('productItem') productItemElement : ProductItemComponent | undefined;
+  
+  // another way to use ViewChild to get reference of child component is by passing the class name of the child component to the ViewChild decorator
+  // viewchild will look for the first occurrence of the ProductItemComponent from the component template and will store its reference inside the productItemElement property
+  // we can then this property to access the properties and methods of the ProductItemComponent
+  // @ViewChild(ProductItemComponent) productItemElement : ProductItemComponent | undefined;
+
+  // **********************************************************************************************************
 
   // we can decorate a property with @ViewChildren decorator to get reference of multiple html elements having the same reference variable
   // initially when the component is just created, the value inside the myAddressElements property will be undefined, After sometime ViewChildren decorator will populate myAddressElements with an object of type QueryList which contains objects of all the html elements having the reference variable(address).
   // @ViewChildren('address') myAddressElements : QueryList<ElementRef<HTMLParagraphElement>> | undefined;
+
+  // **********************************************************************************************************
+
 
   // here we are decorating the products property with @Input decorator to receive data from parent component
   @Input() products: {name: string, price: number}[] = [];
@@ -124,10 +135,10 @@ export class ProductListComponent implements OnInit {
     // *********************************************************************************************************************************
 
     // ViewChild to access child component instance and modify its properties and call its methods from the parent component
-    console.log("this.productItemElement: ", this.productItemElement);
-    this.productItemElement!.parentData1 = "Data set from parent using ViewChild";
-    this.productItemElement!.parentData2 = "Another data set from parent using ViewChild";
-    this.productItemElement!.onClick();
+    // console.log("this.productItemElement: ", this.productItemElement);
+    // this.productItemElement!.parentData1 = "Data set from parent using ViewChild";
+    // this.productItemElement!.parentData2 = "Another data set from parent using ViewChild";
+    // this.productItemElement!.onClick();
 
   }
 
