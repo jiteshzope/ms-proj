@@ -8,7 +8,8 @@ import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 export class ProductListComponent implements OnInit {
 
   // here we are decorating the myDivElement property with @ViewChild decorator to get reference of the div element
-  @ViewChild('myDiv') myDivElement : ElementRef<any> | undefined; // myDivElement of type ElementRef of generic type any
+  // initially when the component is just created, the value inside the myDivElement property will be undefined, After sometime ViewChild decorator will store/populate the object/instance/reference of html element into it
+  @ViewChild('myDiv') myDivElement : ElementRef<any> | undefined; // myDivElement of type ElementRef of generic type any or undefined
 
   // here we are decorating the products property with @Input decorator to receive data from parent component
   @Input() products: {name: string, price: number}[] = [];
