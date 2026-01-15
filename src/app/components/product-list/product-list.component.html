@@ -67,4 +67,8 @@ if we do not use square brackets, the attribute value will be treated as a strin
 <!-- when the event is emitted from the child component, we can run some javascript code -->
 <!-- Mostly we call a method of the parent component when the event is emitted and pass the event data to it as argument which is present in $event -->
 <!-- <app-product-item (myEmmiter)="onMyEmmiter(10, $event, 12)" (valueChanged)="onValueChanged($event)"></app-product-item> -->
-<div (click)="onDivClick($event)" (hover)="onHover($event)">my div</div>
+<!-- <div (click)="onDivClick($event)" (hover)="onHover($event)">my div</div> -->
+
+
+<!-- myDiv is the reference variable which refers to this div element -->
+<div #myDiv>My div</div>
