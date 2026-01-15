@@ -72,3 +72,10 @@ if we do not use square brackets, the attribute value will be treated as a strin
 
 <!-- myDiv is the reference variable which refers to this div element. we will use it in the .ts file with @ViewChild -->
 <div #myDiv>My div</div>
+
+<!-- we can use @ViewChildren() decorator to get a reference of multiple html elements having the same reference variable-->
+<p #address> Telephone colony</p>
+<p #address> near lions club, Malkapur</p>
+
+<!--  -->
+<app-product-item #productItem></app-product-item>
