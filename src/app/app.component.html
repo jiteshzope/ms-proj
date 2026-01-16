@@ -4,22 +4,32 @@
 <!-- The below is called as content projection -->
 <!-- we are projecting the content inside app-home-page component, the content in between the selector tags will be projected and it will be inserted at the place marked by <ng-content> tags in the app-home-page component -->
 <!-- if ng-content tag is absent in the app-home-page component, the content will not be projected and will not be visible and it will be lost -->
-<app-home-page>
+<!-- <app-home-page> -->
     <!-- this will be projected at the place marked by <ng-content> tag without any selector -->
-    <div>This is lion</div>
+    <!-- <div>This is lion</div> -->
 
     <!-- this will be projected at the place marked by <ng-content> tag with selector .text1 -->
-    <div class="text1">This is fox</div>
+    <!-- <div class="text1">This is fox</div> -->
 
     <!-- this will be projected at the place marked by <ng-content> tag with selector .text2 -->
-    <div class="text2">This is dog</div>
+    <!-- <div class="text2">This is dog</div> -->
 
     <!-- this will be projected at the place marked by <ng-content> tag with selector [type] -->
-    <input type="text">
+    <!-- <input type="text"> -->
 
     <!-- this will be projected at the place marked by <ng-content> tag with selector #section1 -->
-    <div id="section1">This is selection 1</div>
-</app-home-page>
+    <!-- <div id="section1">This is selection 1</div> -->
+<!-- </app-home-page> -->
 
 
-<app-product-list [products]="productList"></app-product-list>
+<!-- <app-product-list [products]="productList"></app-product-list> -->
+
+<!-- **************************************************************************************************** -->
+<!-- Component lifecycle hooks -->
+<!-- As soon as angular sees the selector, it starts the process of constructing the component -->
+ <!-- It creates an instance of the component and keeps that instance with itself -->
+<app-information [infoData]="appInfoData" [infoDetails]="appInfoDetails">
+    <!-- content projected inside the child component -->
+    <p #infoContent>This is some projected content from app component</p>
+    <app-badge>This is badge projected from app component</app-badge>
+</app-information>

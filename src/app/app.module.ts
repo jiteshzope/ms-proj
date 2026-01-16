@@ -6,6 +6,8 @@ import { HomePageComponent } from './components/home-page/home-page.component';
 import { HeaderComponent } from './components/header/header.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { ProductItemComponent } from './components/product-item/product-item.component';
+import { BadgeComponent } from './components/badge/badge.component';
+import { InformationComponent } from './components/information/information.component';
 
 @NgModule({
   declarations: [
@@ -13,7 +15,9 @@ import { ProductItemComponent } from './components/product-item/product-item.com
     HomePageComponent,
     HeaderComponent,
     ProductListComponent,
-    ProductItemComponent
+    ProductItemComponent,
+    BadgeComponent,
+    InformationComponent
   ],
   imports: [
     BrowserModule

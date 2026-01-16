@@ -84,3 +84,18 @@ if we do not use square brackets, the attribute value will be treated as a strin
 <!-- we can use viewchild decorator to get a reference of a child component using the class name, it will store the reference of the first occurance of the component from the html file -->
 <!-- <app-product-item></app-product-item>
 <app-product-item></app-product-item> -->
+
+<!-- example of @ContentChild and @ContentChildren -->
+ <app-product-item>
+    <!-- content projected inside the child component -->
+    <p #info>This is some projected content 1</p>
+    <app-badge #badge></app-badge>
+
+    <!-- @ContentChildren example to get reference of multiple projected html elements -->
+    <div #gulabjamun>Projected div</div>
+    <p #gulabjamun>Projected paragraph</p>
+
+    <!-- @ContentChildren example to get reference of multiple projected components -->
+    <app-badge #sweetBadge></app-badge>
+    <app-badge #sweetBadge></app-badge>
+ </app-product-item>
