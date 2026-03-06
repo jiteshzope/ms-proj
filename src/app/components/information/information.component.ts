@@ -1,12 +1,11 @@
-import { Content } from '@angular/compiler/src/render3/r3_ast';
-import { Component, ContentChild, ElementRef, Input, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, ContentChild, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-information',
   templateUrl: './information.component.html',
   styleUrls: ['./information.component.css']
 })
-export class InformationComponent {
+export class InformationComponent implements OnChanges {
 
   @Input() infoData: string = '';
   @Input() infoDetails: { name : string, age: number } | undefined;
@@ -17,13 +16,14 @@ export class InformationComponent {
 
   // constructor is not a lifecycle hook, it is a special method that is called when an instance of the class is created
   constructor() { 
-    console.log("InformationComponent : constructor");
+    console.log("InformationComponent : constructord");
   }
 
   // ngOnChanges is a lifecycle hook that is called during the first change detection cycle, when all the bound input properties are populated with the values from the parent component
   // and it is called every time whenever the value of any of the bound input property changes
   ngOnChanges(changes: SimpleChanges){
-    console.log("InformationComponent : ngOnChanges, changes : ", changes);
+    console.log('infoDetails : ',this.infoDetails);
+    // console.log("InformationComponent : ngOnChanges, changes : ", changes);
     // console.log("InformationComponent : ngOnChanges changes['infoData'].currentValue : ", changes['infoData'].currentValue);
     // console.log("InformationComponent : ngOnChanges changes['infoData'].previousValue : ", changes['infoData'].previousValue);
   }
@@ -37,6 +37,7 @@ export class InformationComponent {
   // ngDoCheck is a lifecycle hook that is called during every change detection cycle
   // this hook is mainly used to detect and act upon changes that Angular can't detect on its own
   ngDoCheck(){
+    // console.log(' DO CHECK infoDetails : ',this.infoDetails); // this is a bad practice to detect the input property changes like this in Do check, because it gets called a lot of times and thus will impact the impact the application performance
     console.log("InformationComponent : ngDoCheck");
   }
 
@@ -45,6 +46,7 @@ export class InformationComponent {
   // This hook is called only once during the first change detection cycle
   ngAfterContentInit(){
     console.log("this.infoContent: ", this.infoContent);
+    console.log("this.infoContent: ", this.infoContent?.nativeElement.textContent);
     console.log("InformationComponent : ngAfterContentInit");
   }
 
@@ -75,3 +77,8 @@ export class InformationComponent {
   }
 
 }
+
+
+// data and html elements are two different things, do not mix it up
+
+// About lifecycle hooks, ...always note that angular calls each hook and we have to write code in these hooks for performing different things

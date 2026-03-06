@@ -17,5 +17,13 @@ export class AppComponent {
     {name: 'Product 3', price: 300}
   ];
 
+  ngOnInit(){
+    setTimeout(()=>{
+      // this.appInfoDetails = { name: 'Mayuri', age: 25 };
+      // this.appInfoDetails.name = 'Mayuri';
+      this.appInfoDetails = {...this.appInfoDetails, name : 'Mayuri'};
+    }, 4000);
+  }
+
   
 }
