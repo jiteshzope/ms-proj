@@ -28,8 +28,10 @@
 <!-- Component lifecycle hooks -->
 <!-- As soon as angular sees the selector, it starts the process of constructing the component -->
  <!-- It creates an instance of the component and keeps that instance with itself -->
-<app-information [infoData]="appInfoData" [infoDetails]="appInfoDetails">
+<!-- <app-information [infoData]="appInfoData" [infoDetails]="appInfoDetails"> -->
     <!-- content projected inside the child component -->
-    <p #infoContent>This is some projected content from app component</p>
-    <app-badge>This is badge projected from app component</app-badge>
-</app-information>
+    <!-- <p #infoContent>This is some projected content from app component</p>
+    <app-badge>This is badge projected from app component</app-badge> -->
+<!-- </app-information> -->
+
+<router-outlet></router-outlet>

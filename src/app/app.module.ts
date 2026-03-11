@@ -8,6 +8,14 @@ import { ProductListComponent } from './components/product-list/product-list.com
 import { ProductItemComponent } from './components/product-item/product-item.component';
 import { BadgeComponent } from './components/badge/badge.component';
 import { InformationComponent } from './components/information/information.component';
+import { RouterModule, Routes } from '@angular/router';
+
+const routes : Routes = [
+  {path : 'home', component : HomePageComponent},
+  {path : 'products', component : ProductListComponent},
+  {path : 'information', component : InformationComponent},
+  {path : '', redirectTo : '/home', pathMatch : 'full'}
+];
 
 @NgModule({
   declarations: [
@@ -20,7 +28,8 @@ import { InformationComponent } from './components/information/information.compo
     InformationComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    RouterModule.forRoot(routes)
   ],
   providers: [],
   bootstrap: [AppComponent]
