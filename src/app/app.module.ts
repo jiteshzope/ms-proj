@@ -11,7 +11,13 @@ import { InformationComponent } from './components/information/information.compo
 import { RouterModule, Routes } from '@angular/router';
 
 const routes : Routes = [
-  {path : 'home', component : HomePageComponent},
+  {path : 'home', component : HomePageComponent, children : [
+    {path : 'products', component : ProductListComponent},
+    {path : 'list', component : InformationComponent},
+    {path : 'again', component : HomePageComponent, children : [
+      {path : 'haha', component : ProductListComponent}
+    ]},
+  ]},
   {path : 'products', component : ProductListComponent},
   {path : 'information', component : InformationComponent},
   {path : '', redirectTo : '/home', pathMatch : 'full'}
