@@ -9,9 +9,10 @@ import { ProductItemComponent } from './components/product-item/product-item.com
 import { BadgeComponent } from './components/badge/badge.component';
 import { InformationComponent } from './components/information/information.component';
 import { RouterModule, Routes } from '@angular/router';
+import { HomePageGuard } from './guards/home-page.guard';
 
 const routes : Routes = [
-  {path : 'home', component : HomePageComponent, children : [
+  {path : 'home', canActivate: [HomePageGuard], component : HomePageComponent, children : [
     {path : 'products', component : ProductListComponent},
     {path : 'list', component : InformationComponent},
     {path : 'again', component : HomePageComponent, children : [
