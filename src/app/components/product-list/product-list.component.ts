@@ -158,4 +158,9 @@ export class ProductListComponent implements OnInit {
     console.log('Mouse hovered',  myHoverEventData);
   }
 
+  hasUnsavedChanges() : boolean {
+    // here we can add logic to check if the changes are saved or not, for example we can check if a form is dirty or not, if it is dirty then we can return false to prevent navigation, if it is not dirty then we can return true to allow navigation
+    return true;
+  }
+
 }
