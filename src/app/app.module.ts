@@ -23,7 +23,7 @@ const routes : Routes = [
       {path : 'haha', component : ProductListComponent}
     ]},
   ]},
-  {path : 'products', canDeactivate: [UnsavedInfoCheckGuard], component : ProductListComponent},
+  {path : 'products/:category/:pageSize', canDeactivate: [UnsavedInfoCheckGuard], component : ProductListComponent},
   {path : 'information', component : InformationComponent},
   {path : '', redirectTo : '/home', pathMatch : 'full'}
 ];

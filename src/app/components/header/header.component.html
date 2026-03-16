@@ -52,6 +52,13 @@
         </div>
 
     </div>
+
+    <!-- we can use routerLink directive to navigate to a route on click of an element -->
+    <button routerLink="/home">Go to home</button>
+    <button routerLink="/home/products">Go to home->products</button>
+    <button routerLink="/home/list">Go to home->list</button>
+    <button routerLink="/products/hygiene/15" [queryParams]="{sort: 'asc', page: 1 }">Go to products</button>
+    <button (click)="gotoProducts()">Go to products 2</button>
 </div>
 
 <!--  anotherTitleTemplate is called as the template reference variable, it starts with # and it refers to this ng-template element -->
@@ -73,9 +80,3 @@
 <ng-template #disposablesTemplate let-item2 let-myfirstColor="key1" let-mysecondColor="key2">
     <span>Disposables: {{ item2?.value }} {{myfirstColor+'&'+mysecondColor}}</span>
 </ng-template>
-
-<!-- we can use routerLink directive to navigate to a route on click of an element -->
-<button routerLink="/home">Go to home</button>
-<button routerLink="/home/products">Go to home->products</button>
-<button routerLink="/home/list">Go to home->list</button>
-<button routerLink="/products">Go to products</button>

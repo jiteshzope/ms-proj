@@ -1,5 +1,6 @@
 import { Component, ElementRef, Input, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { ProductItemComponent } from '../product-item/product-item.component';
+import { Router, ActivatedRoute } from '@angular/router';
 
 // Generic class
 // we can also make a class generic by using angle brackets <> after the class name and specifying the type inside it
@@ -98,12 +99,19 @@ export class ProductListComponent implements OnInit {
   parentVar2: string = "Parent data 2";
 
 
-  constructor() {
+  constructor(private route: ActivatedRoute) {
     // console.log('product: ', product);
     // console.log('category: ', category);
   }
 
   ngOnInit(): void {
+    this.route.queryParams.subscribe((queryParams : any) => {
+      console.log('Query Params: ', queryParams);
+    });
+
+    this.route.params.subscribe((params : any) => {
+      console.log('Route Params: ', params);
+    });
   }
 
   ngAfterViewInit() {
