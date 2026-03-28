@@ -99,7 +99,7 @@ export class ProductListComponent implements OnInit {
   parentVar2: string = "Parent data 2";
 
 
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute, private router: Router) {
     // console.log('product: ', product);
     // console.log('category: ', category);
   }
@@ -112,10 +112,16 @@ export class ProductListComponent implements OnInit {
     this.route.params.subscribe((params : any) => {
       console.log('Route Params: ', params);
     });
-  }
 
+    setTimeout(() => {
+      // Note : If we revisit a route that is already a active route, then the component will not be destroyed and recreated, instead the same instance of the component will be reused, thus ngOnInit() will not be called again, but ngAfterViewInit() will be called again because the view will be reinitialized when we revisit the route. So if we want to execute some code every time we revisit the route, then we can put that code inside ngAfterViewInit() lifecycle hook instead of ngOnInit() lifecycle hook.
+      this.router.navigate(['/products', 'clothing', 10], {queryParams: {sort: 'desc', page: 2 }});
+    }, 3000);
+  }
   ngAfterViewInit() {
     console.log('ProductListComponent view initialized');
+
+    console.log('vsit  jitesh');
 
 
     // ViewChild *************************************************************************************************************

@@ -1,10 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.css'],
+  // encapsulation: ViewEncapsulation.Emulated // default value, styles for this component won't be applied outside, globals styles will be applied to this component
+  // encapsulation: ViewEncapsulation.None  // styles for this component will be applied globally, globals styles will also be applied to this component
+  // encapsulation: ViewEncapsulation.ShadowDom // styles for this component won't be applied globally, globals styles won't be applied to this component
 })
 export class HeaderComponent implements OnInit {
 
