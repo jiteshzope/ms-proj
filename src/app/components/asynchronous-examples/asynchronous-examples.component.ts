@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { filter, map, Observable } from 'rxjs';
+import { concatMap, delay, exhaustMap, from, of } from 'rxjs';
 
 @Component({
   selector: 'app-asynchronous-examples',
@@ -7,8 +7,6 @@ import { filter, map, Observable } from 'rxjs';
   styleUrls: ['./asynchronous-examples.component.css']
 })
 export class AsynchronousExamplesComponent implements OnInit {
-
-  myObservable: Observable<string> | undefined;
 
   constructor() { }
 
@@ -37,34 +35,60 @@ export class AsynchronousExamplesComponent implements OnInit {
     //   complete: () => {console.log('Observable completed')}
     // });
 
-    const observable1 = new Observable((observer) => {
-      let i = 1;
-      setInterval(() => {
-        observer.next(i);
-        if(i === 5) {
-          observer.complete();
-        }
-        i++;
-      }, 1000);
-    });
+    // const observable1 = new Observable((observer) => {
+    //   let i = 1;
+    //   setInterval(() => {
+    //     observer.next(i);
+    //     if(i === 5) {
+    //       observer.complete();
+    //     }
+    //     i++;
+    //   }, 1000);
+    // });
 
-    const newObservable = observable1.pipe(
-      filter(
-        (data : any) => data % 2 === 0
-      ),
-      map(
-        (data : any) => data * 2
-      ),
-      map(
-        (data : any) => data + ' mayuiri'
-      )
-    )
+    // const newObservable = observable1.pipe(
+    //   filter(
+    //     (data : any) => data % 2 === 0
+    //   ),
+    //   map(
+    //     (data : any) => data * 2
+    //   ),
+    //   map(
+    //     (data : any) => data + ' mayuiri'
+    //   )
+    // )
 
-    newObservable.subscribe({
-      next: (data) => {console.log(data)},
-      error: (error) => {console.error(error)},
-      complete: () => {console.log('Observable completed')}
-    });
+    // newObservable.subscribe({
+    //   next: (data) => {console.log(data)},
+    //   error: (error) => {console.error(error)},
+    //   complete: () => {console.log('Observable completed')}
+    // });
+
+    from([1, 2, 3, 4, 5]).pipe(
+      concatMap(
+        (data)=> of(data).pipe(delay(1000)) // creating a new inner observable for each data emitted by the source observable and delaying it by 1 second
+      )).subscribe({
+        next: (data) => {console.log(data)},
+        error: (error) => {console.error(error)},
+        complete: () => {console.log('Observable completed')}
+      });
+
+    from([1, 2, 3, 4, 5]).pipe(
+      exhaustMap(
+        (data)=> of(data).pipe(delay(1000)) // creating a new inner observable for each data emitted by the source observable and delaying it by 1 second
+      )).subscribe({
+        next: (data) => {console.log(data)},
+        error: (error) => {console.error(error)},
+        complete: () => {console.log('Observable completed')}
+      });
+
+
+
+    // of('Hello', 'World').subscribe({
+    //   next: (data) => {console.log(data)},
+    //   error: (error) => {console.error(error)},
+    //   complete: () => {console.log('Observable completed')}
+    // });
 
 
   }
