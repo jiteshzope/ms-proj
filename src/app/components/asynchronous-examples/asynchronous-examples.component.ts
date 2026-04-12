@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { concatMap, delay, exhaustMap, from, of } from 'rxjs';
+import { concatMap, delay, exhaustMap, filter, from, map, mergeMap, of, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-asynchronous-examples',
@@ -71,6 +71,8 @@ export class AsynchronousExamplesComponent implements OnInit {
     // 4. Ashya prakare concatMap source observable data sequentially process karel aani inner observable create karel for each data emitted by source observable and subscribe karel to it one by one
     // 5. Finally from([1, 2, 3, 4, 5]) ni return kelela observable complete hoil aani 'Observable completed' print hoil
 
+    // Note : An observable starts emmiting values as soon as it is subscribed to. Without subscribing to an observable, it will not start emitting values and sits idle.
+
     // from([1, 2, 3, 4, 5]).pipe(
     //   concatMap(
     //     (data)=> of(data).pipe(delay(1000)) // creating a new inner observable for each data emitted by the source observable and delaying it by 1 second
@@ -85,14 +87,14 @@ export class AsynchronousExamplesComponent implements OnInit {
     // 2. If exhaustMap does not have any active inner observable then it will accept the data emitted by source observable. So 1 saathi toh inner observable create karel --> of(1).pipe(delay(1000)) aani lagech subscribe karel, toh 1 second nantar 1 emit karel aani complete hoil, any value received by exhaustMap while the inner observable is active will be ignored, means 2, 3, 4, 5 will be ignored
     // 3. Finally from([1, 2, 3, 4, 5]) ni return kelela observable complete hoil aani 'Observable completed' print hoil
 
-    from([1, 2, 3, 4, 5]).pipe(
-      exhaustMap(
-        (data)=> of(data).pipe(delay(1000)) 
-      )).subscribe({
-        next: (data) => {console.log(data)},
-        error: (error) => {console.error(error)},
-        complete: () => {console.log('Observable completed')}
-      });
+    // from([1, 2, 3, 4, 5]).pipe(
+    //   exhaustMap(
+    //     (data)=> of(data).pipe(delay(1000)) 
+    //   )).subscribe({
+    //     next: (data) => {console.log(data)},
+    //     error: (error) => {console.error(error)},
+    //     complete: () => {console.log('Observable completed')}
+    //   });
 
     // of('Hello', 'World').subscribe({
     //   next: (data) => {console.log(data)},
@@ -100,7 +102,56 @@ export class AsynchronousExamplesComponent implements OnInit {
     //   complete: () => {console.log('Observable completed')}
     // });
 
+    // of(1, 2, 3, 4, 5).pipe(
+    //   switchMap((data) => of(data).pipe(delay(1000)))
+    // ).subscribe({
+    //   next: (data) => {console.log(data)},
+    //   error: (error) => {console.error(error)},
+    //   complete: () => {console.log('Observable completed')}
+    //  }
+    // )
 
+    // of(1, 2, 3, 4, 5).pipe(
+    //   mergeMap((data) => of(data).pipe(delay(1000)))
+    // ).subscribe({
+    //   next: (data) => {console.log(data)},
+    //   error: (error) => {console.error(error)},
+    //   complete: () => {console.log('Observable completed')}
+    //  }
+    // )
+
+    of(1, 2, 3, 4, 5).pipe(
+
+      filter((data) => data % 2 === 0),
+
+      map((data) => data * 2),
+
+      concatMap((data) => of(data).pipe(delay(1000)))
+
+    ).subscribe({
+      next: (data) => {console.log(data)},
+      error: (error) => {console.error(error)},
+      complete: () => {console.log('Observable completed')}
+     }
+    )
+
+    // pipe() method returns a modified observable which emits the data modifed by all the rxjs operators used.
+    
+    of(1, 2, 3, 4, 5).pipe(
+
+      // chaining multiple operators together
+      filter((data) => data % 2 !== 0),
+
+      map((data) => data * 2),
+
+      mergeMap((data) => of(data).pipe(delay(1000)))
+
+    ).subscribe({
+      next: (data) => {console.log(data)},
+      error: (error) => {console.error(error)},
+      complete: () => {console.log('Observable completed')}
+     }
+    )
   }
 
 }

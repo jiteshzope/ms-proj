@@ -14,6 +14,8 @@ import { HomeChildrenAccessGuard } from './guards/home-children-access.guard';
 import { UnsavedInfoCheckGuard } from './guards/unsaved-info-check.guard';
 import { MultiplyPipe } from './pipes/multiply.pipe';
 import { AsynchronousExamplesComponent } from './components/asynchronous-examples/asynchronous-examples.component';
+import { HttpExamplesComponent } from './components/http-examples/http-examples.component';
+import { HttpClientModule } from '@angular/common/http';
 
 const routes : Routes = [
   // canActivate guard is used to decide whether to allow access to a route or not. It can be used to protect routes that require authentication or specific permissions. In this example, the HomePageGuard is applied to the 'home' route, which means that the guard will determine whether the user can access the home page or not. If the guard returns true, the user will be allowed to access the home page; if it returns false, the user will be denied access and can be redirected to another page or shown an error message.
@@ -40,10 +42,12 @@ const routes : Routes = [
     BadgeComponent,
     InformationComponent,
     MultiplyPipe,
-    AsynchronousExamplesComponent
+    AsynchronousExamplesComponent,
+    HttpExamplesComponent
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     RouterModule.forRoot(routes)
   ],
   providers: [],
