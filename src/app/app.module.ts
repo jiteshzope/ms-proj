@@ -54,7 +54,7 @@ const routes : Routes = [
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
-    {provide: HTTP_INTERCEPTORS, useClass: NewInterceptor, multi: true}
+    // {provide: HTTP_INTERCEPTORS, useClass: NewInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })

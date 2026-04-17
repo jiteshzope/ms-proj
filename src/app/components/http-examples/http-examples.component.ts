@@ -14,9 +14,19 @@ export class HttpExamplesComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPosts();
-    this.createNewPost();
-    this.updatePost();
-    this.deletePost();
+    // this.createNewPost();
+    // this.updatePost();
+    // this.deletePost();
+
+    // this.simulateError();
+  }
+
+  simulateError(): void {
+    this.http.get(`${this.baseUrl}/invalid-endpoint`).subscribe({
+      next: (response) => console.log('next/data callback Response:', response),
+      error: (error) => console.error('Error occurred:', error),
+      complete: () => console.log('Request completed')
+    });
   }
 
   // Method to retrieve posts
