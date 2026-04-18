@@ -25,5 +25,14 @@ export class AppComponent {
     }, 4000);
   }
 
+  // $event is the event object which contains information about the event that occurred, on which element it occured and everything related to the element
+  // onNameEnter(event: any) {
+  //   console.log('event:', event);
+  //   console.log('input element object:', event.target);
+  //   console.log('current text in input element:', event.target.value);
+  //   console.log('color of the input element:', event.target.style.color);
+    
+  // }
+
   
 }

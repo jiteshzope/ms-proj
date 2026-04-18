@@ -1,0 +1,33 @@
+<p class="mb-3">normal-form-and-events-example works!</p>
+
+<form class="container p-3 border rounded bg-light">
+    <div class="mb-3">
+        <label for="name" class="form-label">Name:</label>
+        <input type="text" id="name" name="name" class="form-control" (keyup)="onNameEnter($event)">
+    </div>
+
+    <div class="mb-3">
+        <label for="email" class="form-label">Email:</label>
+        <input type="text" id="email" name="email" class="form-control" (keydown)="onEmailEnter($event)">
+    </div>
+
+    <div class="mb-3">
+        <label for="password" class="form-label">Password:</label>
+        <input type="text" id="password" name="password" class="form-control" (keyup)="onPasswordEnter($event)">
+    </div>
+
+    <div class="mb-3">
+        <label for="description" class="form-label">Description:</label>
+        <textarea
+            name="description"
+            id="description"
+            class="form-control"
+            rows="4"
+            (mouseenter)="onMouseEnter($event)"
+            (mouseleave)="onMouseLeave($event)">
+            This is description textarea. When mouse enters this textarea, the background color will change to lightblue and when mouse leaves this textarea, the background color will change to white again.
+        </textarea>
+    </div>
+
+    <button type="button" class="btn btn-primary" (click)="submitClicked()">Submit</button>
+</form>
