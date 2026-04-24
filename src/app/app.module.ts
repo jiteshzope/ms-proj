@@ -20,6 +20,9 @@ import { AuthInterceptor } from './auth.interceptor';
 import { NewInterceptor } from './new.interceptor';
 import { TemplateDrivenFormExampleComponent } from './components/template-driven-form-example/template-driven-form-example.component';
 import { NormalFormAndEventsExampleComponent } from './components/normal-form-and-events-example/normal-form-and-events-example.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsExampleComponent } from './components/reactive-forms-example/reactive-forms-example.component';
+import { TemplateDrivenFormsLearningComponent } from './components/template-driven-forms-learning/template-driven-forms-learning.component';
 
 const routes : Routes = [
   // canActivate guard is used to decide whether to allow access to a route or not. It can be used to protect routes that require authentication or specific permissions. In this example, the HomePageGuard is applied to the 'home' route, which means that the guard will determine whether the user can access the home page or not. If the guard returns true, the user will be allowed to access the home page; if it returns false, the user will be denied access and can be redirected to another page or shown an error message.
@@ -49,12 +52,16 @@ const routes : Routes = [
     AsynchronousExamplesComponent,
     HttpExamplesComponent,
     TemplateDrivenFormExampleComponent,
-    NormalFormAndEventsExampleComponent
+    NormalFormAndEventsExampleComponent,
+    ReactiveFormsExampleComponent,
+    TemplateDrivenFormsLearningComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},

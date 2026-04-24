@@ -1,9 +1,480 @@
-<p>template-driven-form-example works!</p>
+<div class="registration-shell py-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-xl-10">
+        <div class="card border-0 shadow-lg registration-card overflow-hidden">
+          <div class="card-body p-4 p-lg-5">
+            <div class="d-flex flex-column flex-lg-row align-items-lg-end justify-content-between gap-3 mb-4">
+              <div>
+                <span class="badge rounded-pill text-bg-primary px-3 py-2 mb-3">Template-Driven Form</span>
+                <h2 class="h1 mb-2">User Registration</h2>
+                <p class="text-secondary mb-0">Complete your profile, preferences, and account details.</p>
+              </div>
 
+              <div class="status-panel rounded-4 p-3">
+                <div class="small text-uppercase fw-semibold text-secondary mb-2">Form overview</div>
+                <div class="d-flex gap-2 flex-wrap">
+                  <span class="badge" [ngClass]="registrationForm.valid && !skillsInvalid ? 'text-bg-success' : 'text-bg-warning'">
+                    {{ registrationForm.valid && !skillsInvalid ? 'Ready to submit' : 'Needs attention' }}
+                  </span>
+                  <span class="badge" [ngClass]="registrationForm.submitted ? 'text-bg-dark' : 'text-bg-light text-dark border'">
+                    {{ registrationForm.submitted ? 'Submitted' : 'Draft' }}
+                  </span>
+                </div>
+              </div>
+            </div>
 
-<form>
-    <label for="name">Name:</label>
-    <input type="text" id="name">
-    
-    <button type="button" (click)="submitClicked()">Submit</button>
-</form>
+            <form
+              #registrationForm="ngForm"
+              (ngSubmit)="onSubmit(registrationForm)"
+              novalidate
+              class="row g-4"
+            >
+              <fieldset ngModelGroup="personalInfo" #personalInfoGroup="ngModelGroup" class="col-12">
+                <div class="section-card rounded-4 p-4 h-100">
+                  <legend class="section-title">Personal Information</legend>
+                  <div class="row g-3">
+                    <div class="col-md-6">
+                      <label for="firstName" class="form-label fw-semibold">First Name *</label>
+                      <input
+                        type="text"
+                        id="firstName"
+                        name="firstName"
+                        [(ngModel)]="user.personalInfo.firstName"
+                        #firstName="ngModel"
+                        required
+                        minlength="2"
+                        maxlength="30"
+                        pattern="^[a-zA-Z ]+$"
+                        class="form-control form-control-lg"
+                        placeholder="Enter first name"
+                        [class.is-invalid]="firstName.invalid && (firstName.touched || registrationForm.submitted)"
+                      />
+                      <div class="invalid-feedback d-block" *ngIf="firstName.invalid && (firstName.touched || registrationForm.submitted)">
+                        <small *ngIf="firstName.errors?.['required']">First name is required.</small>
+                        <small *ngIf="firstName.errors?.['minlength']">Minimum 2 characters required.</small>
+                        <small *ngIf="firstName.errors?.['maxlength']">Maximum 30 characters allowed.</small>
+                        <small *ngIf="firstName.errors?.['pattern']">Only alphabets and spaces are allowed.</small>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <label for="lastName" class="form-label fw-semibold">Last Name *</label>
+                      <input
+                        type="text"
+                        id="lastName"
+                        name="lastName"
+                        [(ngModel)]="user.personalInfo.lastName"
+                        #lastName="ngModel"
+                        required
+                        minlength="2"
+                        maxlength="30"
+                        pattern="^[a-zA-Z ]+$"
+                        class="form-control form-control-lg"
+                        placeholder="Enter last name"
+                        [class.is-invalid]="lastName.invalid && (lastName.touched || registrationForm.submitted)"
+                      />
+                      <div class="invalid-feedback d-block" *ngIf="lastName.invalid && (lastName.touched || registrationForm.submitted)">
+                        <small *ngIf="lastName.errors?.['required']">Last name is required.</small>
+                        <small *ngIf="lastName.errors?.['minlength']">Minimum 2 characters required.</small>
+                        <small *ngIf="lastName.errors?.['maxlength']">Maximum 30 characters allowed.</small>
+                        <small *ngIf="lastName.errors?.['pattern']">Only alphabets and spaces are allowed.</small>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <label for="email" class="form-label fw-semibold">Email *</label>
+                      <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        [(ngModel)]="user.personalInfo.email"
+                        #email="ngModel"
+                        required
+                        email
+                        class="form-control form-control-lg"
+                        placeholder="name@example.com"
+                        [class.is-invalid]="email.invalid && (email.touched || registrationForm.submitted)"
+                      />
+                      <div class="invalid-feedback d-block" *ngIf="email.invalid && (email.touched || registrationForm.submitted)">
+                        <small *ngIf="email.errors?.['required']">Email is required.</small>
+                        <small *ngIf="email.errors?.['email']">Enter a valid email address.</small>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <label for="dob" class="form-label fw-semibold">Date of Birth *</label>
+                      <input
+                        type="date"
+                        id="dob"
+                        name="dob"
+                        [(ngModel)]="user.personalInfo.dob"
+                        #dob="ngModel"
+                        required
+                        class="form-control form-control-lg"
+                        [class.is-invalid]="dob.invalid && (dob.touched || registrationForm.submitted)"
+                      />
+                      <div class="invalid-feedback d-block" *ngIf="dob.invalid && (dob.touched || registrationForm.submitted)">
+                        <small *ngIf="dob.errors?.['required']">Date of birth is required.</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+
+              <fieldset ngModelGroup="accountInfo" #accountInfoGroup="ngModelGroup" class="col-12 col-lg-6">
+                <div class="section-card rounded-4 p-4 h-100">
+                  <legend class="section-title">Account Information</legend>
+                  <div class="row g-3">
+                    <div class="col-12">
+                      <label for="username" class="form-label fw-semibold">Username *</label>
+                      <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        [(ngModel)]="user.accountInfo.username"
+                        #username="ngModel"
+                        required
+                        minlength="4"
+                        maxlength="15"
+                        pattern="^[a-zA-Z0-9_]+$"
+                        class="form-control"
+                        placeholder="Choose a username"
+                        [class.is-invalid]="username.invalid && (username.touched || registrationForm.submitted)"
+                      />
+                      <div class="invalid-feedback d-block" *ngIf="username.invalid && (username.touched || registrationForm.submitted)">
+                        <small *ngIf="username.errors?.['required']">Username is required.</small>
+                        <small *ngIf="username.errors?.['minlength']">Minimum 4 characters required.</small>
+                        <small *ngIf="username.errors?.['maxlength']">Maximum 15 characters allowed.</small>
+                        <small *ngIf="username.errors?.['pattern']">Only letters, numbers and underscore are allowed.</small>
+                      </div>
+                    </div>
+
+                    <div class="col-12">
+                      <label for="password" class="form-label fw-semibold">Password *</label>
+                      <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        [(ngModel)]="user.accountInfo.password"
+                        #password="ngModel"
+                        required
+                        minlength="6"
+                        maxlength="20"
+                        class="form-control"
+                        placeholder="Create a password"
+                        [class.is-invalid]="password.invalid && (password.touched || registrationForm.submitted)"
+                      />
+                      <div class="invalid-feedback d-block" *ngIf="password.invalid && (password.touched || registrationForm.submitted)">
+                        <small *ngIf="password.errors?.['required']">Password is required.</small>
+                        <small *ngIf="password.errors?.['minlength']">Minimum 6 characters required.</small>
+                        <small *ngIf="password.errors?.['maxlength']">Maximum 20 characters allowed.</small>
+                      </div>
+                    </div>
+
+                    <div class="col-12">
+                      <label for="age" class="form-label fw-semibold">Age *</label>
+                      <input
+                        type="number"
+                        id="age"
+                        name="age"
+                        [(ngModel)]="user.accountInfo.age"
+                        #age="ngModel"
+                        required
+                        min="18"
+                        max="60"
+                        class="form-control"
+                        placeholder="18 to 60"
+                        [class.is-invalid]="age.invalid && (age.touched || registrationForm.submitted)"
+                      />
+                      <div class="invalid-feedback d-block" *ngIf="age.invalid && (age.touched || registrationForm.submitted)">
+                        <small *ngIf="age.errors?.['required']">Age is required.</small>
+                        <small *ngIf="age.errors?.['min']">Minimum age should be 18.</small>
+                        <small *ngIf="age.errors?.['max']">Maximum age allowed is 60.</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+
+              <fieldset ngModelGroup="preferences" #preferencesGroup="ngModelGroup" class="col-12 col-lg-6">
+                <div class="section-card rounded-4 p-4 h-100">
+                  <legend class="section-title">Preferences</legend>
+                  <div class="row g-4">
+                    <div class="col-12">
+                      <label class="form-label fw-semibold d-block">Gender *</label>
+                      <div class="d-flex flex-wrap gap-3">
+                        <div class="form-check option-pill">
+                          <input
+                            type="radio"
+                            name="gender"
+                            [(ngModel)]="user.preferences.gender"
+                            #gender="ngModel"
+                            value="male"
+                            required
+                            class="form-check-input"
+                            id="genderMale"
+                          />
+                          <label class="form-check-label" for="genderMale">Male</label>
+                        </div>
+
+                        <div class="form-check option-pill">
+                          <input
+                            type="radio"
+                            name="gender"
+                            [(ngModel)]="user.preferences.gender"
+                            value="female"
+                            required
+                            class="form-check-input"
+                            id="genderFemale"
+                          />
+                          <label class="form-check-label" for="genderFemale">Female</label>
+                        </div>
+
+                        <div class="form-check option-pill">
+                          <input
+                            type="radio"
+                            name="gender"
+                            [(ngModel)]="user.preferences.gender"
+                            value="other"
+                            required
+                            class="form-check-input"
+                            id="genderOther"
+                          />
+                          <label class="form-check-label" for="genderOther">Other</label>
+                        </div>
+                      </div>
+                      <div class="invalid-feedback d-block" *ngIf="gender.invalid && (gender.touched || registrationForm.submitted)">
+                        <small *ngIf="gender.errors?.['required']">Please select a gender.</small>
+                      </div>
+                    </div>
+
+                    <div class="col-12">
+                      <label for="country" class="form-label fw-semibold">Country *</label>
+                      <select
+                        id="country"
+                        name="country"
+                        [(ngModel)]="user.preferences.country"
+                        #country="ngModel"
+                        required
+                        class="form-select"
+                        [class.is-invalid]="country.invalid && (country.touched || registrationForm.submitted)"
+                      >
+                        <option value="">-- Select Country --</option>
+                        <option *ngFor="let countryItem of countries" [value]="countryItem">
+                          {{ countryItem }}
+                        </option>
+                      </select>
+                      <div class="invalid-feedback d-block" *ngIf="country.invalid && (country.touched || registrationForm.submitted)">
+                        <small *ngIf="country.errors?.['required']">Please select a country.</small>
+                      </div>
+                    </div>
+
+                    <div class="col-12">
+                      <div class="form-check form-switch newsletter-toggle">
+                        <input
+                          type="checkbox"
+                          name="newsletter"
+                          [(ngModel)]="user.preferences.newsletter"
+                          class="form-check-input"
+                          id="newsletter"
+                        />
+                        <label class="form-check-label fw-semibold" for="newsletter">Subscribe to newsletter</label>
+                      </div>
+                    </div>
+
+                    <div class="col-12">
+                      <label class="form-label fw-semibold d-block">Skills *</label>
+                      <div class="row g-2">
+                        <div class="col-sm-6">
+                          <div class="form-check skill-box">
+                            <input
+                              type="checkbox"
+                              name="angularSkill"
+                              [ngModel]="user.preferences.skills.angular"
+                              (ngModelChange)="onSkillChange('angular', $event)"
+                              class="form-check-input"
+                              id="skillAngular"
+                            />
+                            <label class="form-check-label" for="skillAngular">Angular</label>
+                          </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                          <div class="form-check skill-box">
+                            <input
+                              type="checkbox"
+                              name="typescriptSkill"
+                              [ngModel]="user.preferences.skills.typescript"
+                              (ngModelChange)="onSkillChange('typescript', $event)"
+                              class="form-check-input"
+                              id="skillTypescript"
+                            />
+                            <label class="form-check-label" for="skillTypescript">TypeScript</label>
+                          </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                          <div class="form-check skill-box">
+                            <input
+                              type="checkbox"
+                              name="nodeSkill"
+                              [ngModel]="user.preferences.skills.node"
+                              (ngModelChange)="onSkillChange('node', $event)"
+                              class="form-check-input"
+                              id="skillNode"
+                            />
+                            <label class="form-check-label" for="skillNode">Node.js</label>
+                          </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                          <div class="form-check skill-box">
+                            <input
+                              type="checkbox"
+                              name="testingSkill"
+                              [ngModel]="user.preferences.skills.testing"
+                              (ngModelChange)="onSkillChange('testing', $event)"
+                              class="form-check-input"
+                              id="skillTesting"
+                            />
+                            <label class="form-check-label" for="skillTesting">Testing</label>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="invalid-feedback d-block" *ngIf="skillsInvalid && registrationForm.submitted">
+                        <small>Please select at least one skill.</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+
+              <fieldset ngModelGroup="address" #addressGroup="ngModelGroup" class="col-12 col-lg-6">
+                <div class="section-card rounded-4 p-4 h-100">
+                  <legend class="section-title">Address</legend>
+                  <div class="row g-3">
+                    <div class="col-12">
+                      <label for="city" class="form-label fw-semibold">City *</label>
+                      <input
+                        type="text"
+                        id="city"
+                        name="city"
+                        [(ngModel)]="user.address.city"
+                        #city="ngModel"
+                        required
+                        minlength="2"
+                        class="form-control"
+                        placeholder="Enter city"
+                        [class.is-invalid]="city.invalid && (city.touched || registrationForm.submitted)"
+                      />
+                      <div class="invalid-feedback d-block" *ngIf="city.invalid && (city.touched || registrationForm.submitted)">
+                        <small *ngIf="city.errors?.['required']">City is required.</small>
+                        <small *ngIf="city.errors?.['minlength']">City must be at least 2 characters.</small>
+                      </div>
+                    </div>
+
+                    <div class="col-12">
+                      <label for="zipCode" class="form-label fw-semibold">Zip Code *</label>
+                      <input
+                        type="text"
+                        id="zipCode"
+                        name="zipCode"
+                        [(ngModel)]="user.address.zipCode"
+                        #zipCode="ngModel"
+                        required
+                        pattern="^[0-9]{5,6}$"
+                        class="form-control"
+                        placeholder="5 or 6 digit code"
+                        [class.is-invalid]="zipCode.invalid && (zipCode.touched || registrationForm.submitted)"
+                      />
+                      <div class="invalid-feedback d-block" *ngIf="zipCode.invalid && (zipCode.touched || registrationForm.submitted)">
+                        <small *ngIf="zipCode.errors?.['required']">Zip code is required.</small>
+                        <small *ngIf="zipCode.errors?.['pattern']">Zip code must be 5 or 6 digits.</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+
+              <div class="col-12 col-lg-6">
+                <div class="section-card rounded-4 p-4 h-100 d-flex flex-column">
+                  <div class="section-title mb-3">About You</div>
+                  <label for="about" class="form-label fw-semibold">Short Bio *</label>
+                  <textarea
+                    id="about"
+                    name="about"
+                    [(ngModel)]="user.about"
+                    #about="ngModel"
+                    required
+                    minlength="10"
+                    maxlength="200"
+                    rows="6"
+                    class="form-control flex-grow-1"
+                    placeholder="Tell us a bit about yourself"
+                    [class.is-invalid]="about.invalid && (about.touched || registrationForm.submitted)"
+                  ></textarea>
+                  <div class="d-flex justify-content-between align-items-center mt-2 small text-secondary">
+                    <span>Keep it clear and concise.</span>
+                    <span>{{ user.about.length }}/200</span>
+                  </div>
+                  <div class="invalid-feedback d-block" *ngIf="about.invalid && (about.touched || registrationForm.submitted)">
+                    <small *ngIf="about.errors?.['required']">This field is required.</small>
+                    <small *ngIf="about.errors?.['minlength']">Minimum 10 characters required.</small>
+                    <small *ngIf="about.errors?.['maxlength']">Maximum 200 characters allowed.</small>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <div class="section-card rounded-4 p-4">
+                  <div class="form-check terms-box mb-3">
+                    <input
+                      type="checkbox"
+                      name="termsAccepted"
+                      [(ngModel)]="user.termsAccepted"
+                      #termsAccepted="ngModel"
+                      required
+                      class="form-check-input"
+                      id="termsAccepted"
+                    />
+                    <label class="form-check-label fw-semibold" for="termsAccepted">
+                      I accept the terms and conditions *
+                    </label>
+                  </div>
+
+                  <div class="invalid-feedback d-block mb-4" *ngIf="termsAccepted.invalid && (termsAccepted.touched || registrationForm.submitted)">
+                    <small>You must accept the terms and conditions.</small>
+                  </div>
+
+                  <div class="row g-3 align-items-center">
+                    <div class="col-lg-7">
+                      <div class="debug-panel rounded-4 p-3">
+                        <div class="row g-2 small">
+                          <div class="col-sm-4"><strong>Form Valid:</strong> {{ registrationForm.valid }}</div>
+                          <div class="col-sm-4"><strong>Submitted:</strong> {{ registrationForm.submitted }}</div>
+                          <div class="col-sm-4"><strong>Skills Valid:</strong> {{ !skillsInvalid }}</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-5">
+                      <div class="d-grid d-sm-flex justify-content-lg-end gap-2">
+                        <button type="button" class="btn btn-outline-secondary btn-lg px-4" (click)="resetForm(registrationForm)">
+                          Reset
+                        </button>
+                        <button type="submit" class="btn btn-primary btn-lg px-4" [disabled]="registrationForm.invalid || skillsInvalid">
+                          Submit Registration
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

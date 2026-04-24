@@ -1,0 +1,14 @@
+<p>template-driven-forms-learning works!</p>
+
+<!-- As soon as we import FormsModule in app.module.ts, the ngForm directive is automatically applied to the form element -->
+<!-- FormControl, FormGroup are basic building blocks of template-driven forms and they both extend the AbstractControl class -->
+<!-- While using template-driven forms, we will deal with the objects of FormControl, FormGroup and NgForm class -->
+<!-- ngSubmit is an event of the NgForm directive and it is invoked when the form is submitted ..so we can call a method in ts file when this event is invoked and pass the NgForm object to it -->
+ <!-- To convert a normal element to a form control, we use the ngModel directive and a name attribute -->
+
+<form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
+    <input type="text" ngModel name="firstname" required minlength="3">
+    <input type="text" ngModel name="lastname">
+    <input type="email" ngModel name="email" required email>
+    <button type="submit">Submit</button>
+</form>
