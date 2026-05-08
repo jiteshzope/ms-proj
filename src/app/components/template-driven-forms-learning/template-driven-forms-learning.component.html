@@ -8,22 +8,22 @@
 
 <form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)" style="display: flex; flex-direction: column; gap: 10px; background-color: lightgray; width: 300px; padding: 20px; border-radius: 5px;">
 
-    <input type="text" placeholder="First name" ngModel name="firstname" required minlength="3">
+    <input type="text" placeholder="First name" [(ngModel)]="formModel.firstname" name="firstname" required minlength="3">
     <!-- <div class="error danger" *ngIf="myForm.submitted === true && myForm.controls['firstname']?.errors !== null">
         <div *ngIf="myForm.controls['firstname']?.errors?.['required']">First name is required.</div>
         <div *ngIf="myForm.controls['firstname']?.errors?.['minlength']">First name must be at least 3 characters long.</div>
     </div> -->
 
-    <input type="text" placeholder="Last name" ngModel name="lastname">
+    <input type="text" placeholder="Last name" [(ngModel)]="formModel.lastname" name="lastname">
 
 
-    <input type="email" placeholder="Email" ngModel name="email" required email>
+    <input type="email" placeholder="Email" [(ngModel)]="formModel.email" name="email" required email>
     <div *ngIf="myForm.controls['email']?.errors?.['required']">Email is required.</div>
     <div *ngIf="myForm.submitted === true && myForm.controls['email']?.errors?.['email']">Enter valid email.</div>
 
     <div ngModelGroup="address">
-        <input type="text" placeholder="City" ngModel name="city" required>
-        <input type="text" placeholder="State" ngModel name="state" required>
+        <input type="text" placeholder="City" [(ngModel)]="formModel.address.city" name="city" required>
+        <input type="text" placeholder="State" [(ngModel)]="formModel.address.state" name="state" required>
     </div>
 
 
